@@ -3,18 +3,21 @@
 if (!isset($_SESSION)) {
   session_start();
 }
-  include 'class/studentclass.php';
-  include '/class/sessions.class.php';
-  include './db/connect.php';
-  include 'functions.php';
-  include 'class/resizeimage.class.php';
-  include 'class/photograph.class.php';
-  include 'class/lecturer.class.php';
+
+// Set application path
+define("DS", DIRECTORY_SEPARATOR);
+define("APP_ROOT", dirname(dirname(dirname(__FILE__))).DS);
+
+// Link common files
+require_once APP_ROOT . '/scripts/db/connect.php';
+require_once APP_ROOT . '/scripts/core/functions.php';
+require_once APP_ROOT . '/scripts/core/autoload.php';
   $student = new Student();
   $session = new Session();
   $resize = new Resizeimage();
   $photo = new Photograph();
   $lecturer = new Lecturer();
+  $admin = new Admin();
 
   $errrors = array();
 

@@ -98,18 +98,21 @@ function loggedIn(){
 
 function restricted(){
 	if (!loggedIn()){
-		redirectTo('login.php');
+		redirectTo('../user/login.php');
 	}
 }
 
 function administrator(){
 	if (!isAdmin()){
-		redirectTo('../login.php');
+		redirectTo('../user/login.php');
 	}
 }
 
  function isAdmin(){
- 	return $_SESSION['1s@dmin'] ? true : false;
+ 	if($_SESSION['priviledges'] == '3'){
+    return true;
+  }
+  return false;
  }
 
 function admin() {
@@ -144,5 +147,26 @@ function date_to_text($date=""){
   $unixdatetime = strtotime($date);
   return strftime("%B %d, %Y", $unixdatetime);
 }
-
+function point_adder($grade,$credithrs){
+      if($grade == 'A'){
+        $point = 5;
+      }
+      elseif($grade == 'B'){
+        $point = 4;
+      }
+      elseif($grade == 'C'){
+        $point = 3;
+      }
+      elseif($grade = 'D'){
+        $point = 2;
+      }
+      elseif($grade == 'E'){
+        $point = 1;
+      }
+      else{
+        $point = '0';
+    }
+    $total_point = $point * $credithrs;
+    return $total_point;
+}
 ?>
